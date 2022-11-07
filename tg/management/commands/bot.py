@@ -2,9 +2,9 @@ import os
 
 from tg import db_users
 from django.core.management.base import BaseCommand
-from telebot import TeleBot, types
+from telebot import TeleBot, types, apihelper
 
-from tg.db_users import check_value, check_counter, check_lvl_user
+from tg.db_users import check_counter, check_lvl_user
 
 bot = TeleBot(os.getenv('TG_TOKEN'), parse_mode=None)
 
@@ -41,10 +41,15 @@ def send_random_templ(message):
         bot.send_message(message.from_user.id, text=text, reply_markup=markup_1)
 
     elif message.text == 'Получить следующую практику':
-        text = db_users.check_value(message)
-        markup_1 = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-        markup_1.add(item_done, item_skip, item_back)
-        bot.send_message(message.from_user.id, text=text, reply_markup=markup_1)
+        try:
+            text = db_users.check_value(message)
+            markup_1 = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+            markup_1.add(item_done, item_skip, item_back)
+            bot.send_message(message.from_user.id, text=text, reply_markup=markup_1)
+        except Exception as ApiTelegramException:
+            print('tg ex')
+            return send_random_templ(message)
+
 
     elif message.text == 'Помощь':
         text_info = 'Каждая выполненная практика приносит один балл.\n\
@@ -65,21 +70,29 @@ def send_random_templ(message):
         bot.send_message(message.from_user.id, text='3,2,1...', reply_markup=markup_menu)
 
     elif message.text == 'Выполнил практику':
-        check_counter(message)
-        text = db_users.check_value(message)
-        markup_1 = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-        item_done = types.KeyboardButton('Выполнил практику')
-        item_skip = types.KeyboardButton('Пропуск практики')
-        markup_1.add(item_done, item_skip, item_back)
-        bot.send_message(message.from_user.id, text=text, reply_markup=markup_1)
+        try:
+            check_counter(message)
+            text = db_users.check_value(message)
+            markup_1 = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+            item_done = types.KeyboardButton('Выполнил практику')
+            item_skip = types.KeyboardButton('Пропуск практики')
+            markup_1.add(item_done, item_skip, item_back)
+            bot.send_message(message.from_user.id, text=text, reply_markup=markup_1)
+        except Exception as ApiTelegramException:
+            print('tg ex')
+            return send_random_templ(message)
 
     elif message.text == 'Пропуск практики':
-        text = db_users.check_value(message)
-        markup_1 = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-        item_done = types.KeyboardButton('Выполнил практику')
-        item_skip = types.KeyboardButton('Пропуск практики')
-        markup_1.add(item_done, item_skip, item_back)
-        bot.send_message(message.from_user.id, text=text, reply_markup=markup_1)
+        try:
+            text = db_users.check_value(message)
+            markup_1 = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+            item_done = types.KeyboardButton('Выполнил практику')
+            item_skip = types.KeyboardButton('Пропуск практики')
+            markup_1.add(item_done, item_skip, item_back)
+            bot.send_message(message.from_user.id, text=text, reply_markup=markup_1)
+        except Exception as ApiTelegramException:
+            print('tg ex')
+            return send_random_templ(message)
 
     elif message.text == 'Выбрать уровень квестов':
         markup_menu_lvl = types.ReplyKeyboardMarkup(resize_keyboard=True)

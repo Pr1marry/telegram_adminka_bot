@@ -100,9 +100,9 @@ class Profile(models.Model):
 class Message(models.Model):
 
     class level_m(models.TextChoices):
-        JUNIOR = 1, _('Junior')
-        MIDDLE = 2, _('Middle')
-        SENIOR = 3, _('Senior')
+        JUNIOR = 5, _('Junior')
+        MIDDLE = 6, _('Middle')
+        SENIOR = 7, _('Senior')
 
     class probability_v(models.TextChoices):
         twenty = 20, _('0,2')

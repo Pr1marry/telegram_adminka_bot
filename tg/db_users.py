@@ -20,11 +20,11 @@ def check_value(message):
     user_counter = Profile.objects.get(user_id=message.from_user.id)
     level_user = user_counter.level
     if level_user == 'JR':
-        return mes_lvl_2(message, 1)
+        return mes_lvl_2(message, 5)
     elif level_user == 'MD':
-        return mes_lvl_2(message, 2)
+        return mes_lvl_2(message, 6)
     elif level_user == 'SR':
-        return mes_lvl_2(message, 3)
+        return mes_lvl_2(message, 7)
 
 
 def check_counter(message):
