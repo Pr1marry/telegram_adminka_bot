@@ -4,7 +4,7 @@ from django.core.management import BaseCommand
 import pandas as pd
 from sqlalchemy import create_engine
 import psycopg2
-engine = create_engine("postgresql://postgres:$psqldb@localhost:5432/tg_base")
+engine = create_engine(os.getenv('PSQL_SQLALCH'))
 
 
 def data_file():

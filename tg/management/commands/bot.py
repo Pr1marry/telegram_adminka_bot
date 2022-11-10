@@ -104,30 +104,27 @@ def send_random_templ(message):
 
     elif message.text == '5 уровень':
         text_1 = check_lvl_user(message, 1)
-        text_2 = db_users.check_value(message)
+        # text_2 = db_users.check_value(message)
         markup_1 = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-        item_done = types.KeyboardButton('Выполнил практику')
-        item_skip = types.KeyboardButton('Пропуск практики')
-        markup_1.add(item_done, item_skip, item_back)
-        bot.send_message(message.from_user.id, text=str(text_1) + str(text_2), reply_markup=markup_1)
+        item_done = types.KeyboardButton('Получить следующую практику')
+        markup_1.add(item_done, item_back)
+        bot.send_message(message.from_user.id, text=str(text_1), reply_markup=markup_1)
 
     elif message.text == '6 уровень':
         text_1 = check_lvl_user(message, 2)
-        text_2 = db_users.check_value(message)
+        # text_2 = db_users.check_value(message)
         markup_1 = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-        item_done = types.KeyboardButton('Выполнил практику')
-        item_skip = types.KeyboardButton('Пропуск практики')
-        markup_1.add(item_done, item_skip, item_back)
-        bot.send_message(message.from_user.id, text=str(text_1) + str(text_2), reply_markup=markup_1)
+        item_done = types.KeyboardButton('Получить следующую практику')
+        markup_1.add(item_done, item_back)
+        bot.send_message(message.from_user.id, text=str(text_1), reply_markup=markup_1)
 
     elif message.text == '7 уровень':
         text_1 = check_lvl_user(message, 3)
-        text_2 = db_users.check_value(message)
+        # text_2 = db_users.check_value(message)
         markup_1 = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-        item_done = types.KeyboardButton('Выполнил практику')
-        item_skip = types.KeyboardButton('Пропуск практики')
-        markup_1.add(item_done, item_skip, item_back)
-        bot.send_message(message.from_user.id, text=str(text_1) + str(text_2), reply_markup=markup_1)
+        item_done = types.KeyboardButton('Получить следующую практику')
+        markup_1.add(item_done, item_back)
+        bot.send_message(message.from_user.id, text=str(text_1), reply_markup=markup_1)
 
 
 @bot.message_handler(commands=['quest done'])

@@ -2,28 +2,30 @@ version: "3.10"
 
 services:
   db:
-    image: postgres:latest
+    image: postgres:15
     restart: unless-stopped
     env_file:
       - ./.env
     volumes:
       - ./data/db:/var/lib/postgresql/data
     ports:
-      - "5434:5433"
+      - "5432:5432"
   web:
     build: .
     container_name: adminka
-    command: bash -c "python manage.py runserver 0.0.0.0:8001"
+    command: bash -c "python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/code
     ports:
-      - 8001:8000
+      - 8000:8000
     env_file:
       - ./.env
     depends_on:
       - db
     entrypoint: /entrypoint.sh
   bot:
+    build: .
+    restart: unless-stopped
     container_name: bot
     command: bash -c "python manage.py bot"
     env_file:
@@ -31,3 +33,12 @@ services:
     depends_on:
       - db
       - web
+  import_excel_file:
+    build: .
+    container_name: excel
+    command: bash -c "python manage.py import_exel"
+    env_file:
+      - ./.env
+    depends_on:
+      - web
+      - db

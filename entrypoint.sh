@@ -6,7 +6,7 @@ python manage.py migrate
 
 # Create superuser
 echo "Creating superuser ..."
-python manage.py createsuperuser --noinput
+python manage.py createsuperuser --username "admin" --email "admin@banl.com" --password "adminpow"
 
 # Start server
 echo "Starting server ..."
