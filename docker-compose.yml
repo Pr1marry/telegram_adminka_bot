@@ -34,12 +34,4 @@ services:
     depends_on:
       - db
       - web
-  import_excel_file:
-    build: .
-    container_name: excel
-    command: bash -c "python manage.py import_exel"
-    env_file:
-      - ./.env
-    depends_on:
-      - web
-      - db
+
